@@ -1,0 +1,29 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "TerraformS3Access",
+            "Effect": "Allow",
+            "Action": ["s3:*"],
+            "Resource": "*"
+        },
+        {
+            "Sid": "TerraformIAMAccess",
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateUser",
+                "iam:DeleteUser",
+                "iam:PutUserPolicy",
+                "iam:AttachUserPolicy",
+                "iam:CreatePolicy"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "TerraformLoggingAccess",
+            "Effect": "Allow",
+            "Action": ["cloudtrail:*"],
+            "Resource": "*"
+        }
+    ]
+}
