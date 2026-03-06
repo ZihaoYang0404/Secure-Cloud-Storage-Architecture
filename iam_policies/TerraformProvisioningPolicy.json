@@ -13,12 +13,27 @@
             "Action": [
                 "iam:CreateUser",
                 "iam:DeleteUser",
-                "iam:PutUserPolicy",
+                "iam:GetUser",
+                "iam:ListUsers",
+
+                "iam:CreatePolicy",
+                "iam:DeletePolicy",
+                "iam:GetPolicy",
+                "iam:ListPolicies",
+                "iam:GetPolicyVersion",
+                "iam:ListPolicyVersions",
+
                 "iam:AttachUserPolicy",
-                "iam:CreatePolicy"
+                "iam:DetachUserPolicy",
+                "iam:ListAttachedUserPolicies",
+
+                "iam:PutUserPolicy",
+                "iam:GetUserPolicy",
+                "iam:DeleteUserPolicy",
+                "iam:ListUserPolicies"
             ],
             "Resource": "*"
-        },
+        },  
         {
             "Sid": "TerraformLoggingAccess",
             "Effect": "Allow",
