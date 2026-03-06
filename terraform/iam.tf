@@ -6,22 +6,18 @@ resource "aws_iam_user" "admin_user" {
 }
 resource "aws_iam_user_policy_attachment" "admin_s3" {
   user       = aws_iam_user.admin_user.name
-  policy_arn = "arn:aws:policy/AmazonS3FullAccess"
+  policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
 }
 
 resource "aws_iam_user_policy_attachment" "admin_kms" {
   user       = aws_iam_user.admin_user.name
-  policy_arn = "arn:aws:policy/AWSKeyManagementServicePowerUser"
+  policy_arn = "arn:aws:iam::aws:policy/AWSKeyManagementServicePowerUser"
 }
 
-resource "aws_iam_user_policy_attachment" "admin_cloudtrail" {
-  user       = aws_iam_user.admin_user.name
-  policy_arn = "arn:aws:policy/CloudTrailReadOnlyAccess"
-}
 
 resource "aws_iam_user_policy_attachment" "admin_change_password" {
   user       = aws_iam_user.admin_user.name
-  policy_arn = "arn:aws:policy/IAMUserChangePassword"
+  policy_arn = "arn:aws:iam::aws:policy/IAMUserChangePassword"
 }
 
 

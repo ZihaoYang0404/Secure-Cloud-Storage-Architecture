@@ -6,6 +6,7 @@ data "aws_caller_identity" "current" {}
 # Logging Bucket (Stores CloudTrail logs)
 resource "aws_s3_bucket" "logging_bucket" {
   bucket = "zihao-access-logs-2026"
+  force_destroy = true
 
   tags = {
     Name        = "CloudTrail Logs"
@@ -50,17 +51,17 @@ resource "aws_s3_bucket_policy" "cloudtrail_logging_policy" {
     Statement = [
 
       {
-        Sid = "AWSCloudTrailAclCheck"
+        Sid    = "AWSCloudTrailAclCheck"
         Effect = "Allow"
         Principal = {
           Service = "cloudtrail.amazonaws.com"
         }
-        Action = "s3:GetBucketAcl"
+        Action   = "s3:GetBucketAcl"
         Resource = aws_s3_bucket.logging_bucket.arn
       },
 
       {
-        Sid = "AWSCloudTrailWrite"
+        Sid    = "AWSCloudTrailWrite"
         Effect = "Allow"
         Principal = {
           Service = "cloudtrail.amazonaws.com"

@@ -15,7 +15,7 @@ output "storage_bucket_arn" {
 
 output "test_users" {
   description = "List of IAM users created for security testing"
-  value       = [
+  value = [
     aws_iam_user.admin_user.name,
     aws_iam_user.analyst_user.name,
     aws_iam_user.outsider_user.name

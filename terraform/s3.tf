@@ -22,7 +22,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "kms_encryption" {
 
   rule {
     apply_server_side_encryption_by_default {
-      sse_algorithm     = "aws:kms"
+      sse_algorithm = "aws:kms"
     }
     # Reduces KMS costs and improves performance 
     bucket_key_enabled = true
@@ -44,22 +44,24 @@ resource "aws_s3_bucket_policy" "zihao_ip_restriction" {
   bucket = aws_s3_bucket.secure_storage.id
 
   policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-        "Sid": "IPRestrictionExcludingRoot",
-        "Effect": "Deny",
-        "NotPrincipal": {
-          "AWS": "arn:aws:iam::065025975601:root"
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Sid    = "AllowOnlyFromWhitelistedIP",
+        Effect = "Allow",
+        Principal = {
+          AWS = "*"
         },
-        "Action": "s3:*",
-        "Resource": [
-          "arn:aws:s3:::zihao-cloud-storage-2026",
-          "arn:aws:s3:::zihao-cloud-storage-2026/*"
+        Action = "s3:*",
+        Resource = [
+          aws_s3_bucket.secure_storage.arn,
+          "${aws_s3_bucket.secure_storage.arn}/*"
         ],
-        "Condition": {
-        "NotIpAddress": {
-          "aws:SourceIp": "109.175.195.178/32"
+        Condition = {
+          IpAddress = {
+            "aws:SourceIp" = [
+              "109.175.195.178/32"
+            ]
           }
         }
       }
